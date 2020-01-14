@@ -37,7 +37,6 @@ export default {
       this.blogs = response.data
     },
     async deletePost (id) {
-      console.log(id)
       await BlogService.deleteBlogPost(id)
       this.$router.push({ name: 'home' })
     }
