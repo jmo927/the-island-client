@@ -5,9 +5,37 @@
       <router-link to="/about">About</router-link> |
       <router-link to="/blog">Blog</router-link>
     </div>
-    <router-view/>
+    <router-view v-if="apiReady"/>
+    <div v-else>loading...</div>
   </div>
 </template>
+
+<script>
+import BlogService from '@/services/BlogService'
+
+export default {
+  data () {
+    return {
+      apiReady: false
+    }
+  },
+  methods: {
+    // Where the data happens.
+    async getBlogs () {
+      const response = await BlogService.fetchPosts()
+
+      if (response.data) {
+        this.apiReady = true
+      } else {
+        setTimeout(this.getBlogs(), 500)
+      }
+    }
+  },
+  created () {
+    this.getBlogs()
+  }
+}
+</script>
 
 <style>
 #app {
