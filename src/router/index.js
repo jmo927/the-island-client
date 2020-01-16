@@ -4,7 +4,8 @@ import Home from '../views/Home.vue'
 import Blog from '../views/Blog.vue'
 import NewBlogPost from '../views/NewBlogPost'
 import EditBlogPost from '../views/EditBlogPost'
-import AdminBlog from '../views/Admin'
+import BlogPost from '../components/BlogPost'
+// import AdminBlog from '../views/Admin'
 
 Vue.use(VueRouter)
 
@@ -25,7 +26,8 @@ const routes = [
   {
     path: '/blog',
     name: 'blogspace',
-    component: Blog
+    component: Blog,
+    props: { admin: 'false' }
   },
   {
     path: '/blog/new',
@@ -39,8 +41,14 @@ const routes = [
   },
   {
     path: '/blog/admin',
-    name: 'blogadmin',
-    component: AdminBlog
+    name: 'blogspace',
+    component: Blog,
+    props: { admin: 'true' }
+  },
+  {
+    path: '/blog/:id',
+    name: 'blogpost',
+    component: BlogPost
   }
 ]
 

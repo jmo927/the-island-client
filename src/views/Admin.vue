@@ -8,7 +8,8 @@
       :key="idx"
       :title="post.title"
       :text="post.text"
-      :date="post.date"
+      :date="post.createdAt"
+      :tags="post.tags"
       :id="post._id"
       admin="true" />
     <!-- <div v-for="(post, idx) in blogs" :key="idx">

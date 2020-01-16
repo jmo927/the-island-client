@@ -1,7 +1,7 @@
 <template>
-  <div class="blog-post">
+  <div class="blog-blurb" @click="loadBlog(id)">
       <h2>{{ title }}</h2>
-      <p v-html="text"></p>
+      <p v-html="blurbText"></p>
       <p>{{ dateString }}
       <p>Tags: {{ tags }}</p>
       <div v-if="admin === 'true'" class="admin-stuff">
@@ -19,52 +19,44 @@ export default {
   computed: {
     dateString () {
       return this.date.slice(0, 10)
-    }
-  },
-  data () {
-    return {
-      title: '',
-      text: '',
-      tags: [],
-      date: '',
-      admin: ''
+    },
+    blurbText () {
+      return (this.text.slice(0, 200) + '...')
     }
   },
   props: {
-    // title: String,
-    // text: String,
-    // date: Date,
-    // admin: String,
-    // tags: Array,
+    title: String,
+    text: String,
+    date: String,
+    admin: String,
+    tags: Array,
     id: String
+    // msg: String
   },
   methods: {
-    async getPost (id) {
-      const response = await BlogService.getBlogPost(id)
-      this.title = response.data.title
-      this.text = response.data.text
-      this.tags = response.data.tags
-      this.date = response.data.createdAt
-    },
     async deletePost (id) {
       await BlogService.deleteBlogPost(id)
       this.$router.push({ name: 'home' })
+    },
+    loadBlog (id) {
+      this.$router.push({ name: 'blogpost', params: { id: id } })
     }
-  },
-  created () {
-    this.getPost(this.$route.params.id)
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.blog-post {
+.blog-blurb {
     border: 1px solid black;
     margin: 5px;
-    padding: 10px;
+    padding: 5px;
     text-align: justify;
     /* max-width: 700px; */
+}
+
+.blog-blurb:hover {
+    cursor: pointer;
 }
 
 /* h2, h3, h4 {

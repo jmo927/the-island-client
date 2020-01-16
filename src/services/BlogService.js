@@ -6,7 +6,7 @@ export default {
   },
 
   getBlogPost (params) {
-    return Api().get('/api/blog/' + params.id)
+    return Api().get('/api/blog/' + params)
   },
 
   addBlogPost (params) {

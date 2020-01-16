@@ -1,27 +1,31 @@
 <template>
   <div class="blog">
     <h1>Posts</h1>
-    This file will list all the posts.
 
-    <BlogPost
+    <BlogBlurb
       v-for="(post, idx) in blogs"
       :key="idx"
       :title="post.title"
       :text="post.text"
-      :date="post.date"
+      :date="post.createdAt"
+      :tags="post.tags"
       :id="post._id"
-      admin="false" />
+      :admin="admin" />
   </div>
 </template>
 
 <script>
 import BlogService from '@/services/BlogService'
-import BlogPost from '@/components/BlogPost'
+import BlogBlurb from '@/components/BlogBlurb'
 
 export default {
   name: 'blog',
   components: {
-    BlogPost
+    // BlogPost,
+    BlogBlurb
+  },
+  props: {
+    admin: String
   },
   data () {
     return {
