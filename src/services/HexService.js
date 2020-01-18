@@ -6,18 +6,18 @@ export default {
   },
 
   getThisHex (params) {
-    return Api().get('/api/hexes/' + params.id)
+    return Api().get('/api/hexes/' + params)
   },
 
   updateHex (params) {
     return Api().put('/api/hexes/edit/' + params.id, params)
-  },
+  }
 
-//   addHex (params) {
-//     return Api().post('/api/hexes/new', params)
-//   },
+  //   addHex (params) {
+  //     return Api().post('/api/hexes/new', params)
+  //   },
 
-//   deleteHex (params) {
-//     return Api().delete('/api/hexes/delete/' + params)
-//   }
+  //   deleteHex (params) {
+  //     return Api().delete('/api/hexes/delete/' + params)
+  //   }
 }
