@@ -2,10 +2,18 @@
   <div class="hex-summary">
     <h1>An Overview of the Hex</h1>
     Or maybe the settings or something.  Who knows, a lot's going to happen all at once here.
+    <div v-if="hasData">
+      <h1>{{ activeHex }}.  {{ summary.terrain.type }}</h1>
 
-    <h1>{{ activeHex }}</h1>
-
-    <p>{{ summary }} </p>
+      <p>{{ summary.terrain.description }} </p>
+      <p>Monument: {{ summary.monument.name }} </p>
+      <p>Rumor: {{ summary.rumor.name }} </p>
+      <p>Secret: {{ summary.secret.name }} </p>
+      <p>Table: {{ summary.encounterTable }} </p>
+    </div>
+    <div v-else>
+      loading...
+    </div>
   </div>
 </template>
 
@@ -15,13 +23,16 @@ export default {
   name: 'hexsummary',
   data () {
     return {
-      summary: '(placeholder)'
+      hasData: false,
+      summary: {}
     }
   },
   methods: {
     async getHexData () {
       const response = await HexService.getThisHex(this.activeHex)
+      // console.log(response.data)
       this.summary = response.data
+      this.hasData = true
     }
   },
   created () {
